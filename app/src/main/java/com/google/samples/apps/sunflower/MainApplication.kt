@@ -26,4 +26,5 @@ class MainApplication : Application(), Configuration.Provider {
     get() = Configuration.Builder()
       .setMinimumLoggingLevel(if (BuildConfig.DEBUG) android.util.Log.DEBUG else android.util.Log.ERROR)
       .build()
+
 }
