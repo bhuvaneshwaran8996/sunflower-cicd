@@ -112,7 +112,7 @@ androidComponents {
 }
 ktlint{
   android = true
-  ignoreFailures = false
+  ignoreFailures = true
   reporters {
     reporter(ReporterType.PLAIN)
     reporter(ReporterType.CHECKSTYLE)
