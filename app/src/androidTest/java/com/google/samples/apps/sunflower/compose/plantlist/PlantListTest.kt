@@ -30,7 +30,6 @@ import org.junit.runner.RunWith
 class PlantListTest {
     @get:Rule
     val composeTestRule = createComposeRule()
-    
     @Test
     fun plantList_itemShown() {
         startPlantList()
