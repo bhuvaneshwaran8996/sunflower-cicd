@@ -80,5 +80,5 @@ jobs:
           uses: actions/upload-artifact@v2
           with:
             name: ktlint-report
-            path: '**/build/reports/ktlint'
+            path: '**/build/reports/ktlint/ktlintKotlinScriptCheck/ktlintKotlinScriptCheck.xml'
 
