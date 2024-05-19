@@ -34,22 +34,22 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
- # Disabling androidTest temporarily due to the stability issue b/251319989
-  androidTest:
-    needs: build
-    runs-on: macOS-latest
-    timeout-minutes: 45
-
-    steps:
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-      - uses: actions/checkout@v3
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
-
-      - name: Checkout
-        uses: actions/checkout@v3
+# # Disabling androidTest temporarily due to the stability issue b/251319989
+#  androidTest:
+#    needs: build
+#    runs-on: macOS-latest
+#    timeout-minutes: 45
+#
+#    steps:
+#      - uses: actions/setup-java@v3
+#        with:
+#          distribution: 'temurin'
+#          java-version: '17'
+#      - uses: actions/checkout@v3
+#
+#      - name: Setup Android SDK
+#        uses: android-actions/setup-android@v2
+#
+#      - name: Checkout
+#        uses: actions/checkout@v3
 
