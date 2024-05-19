@@ -59,7 +59,10 @@ jobs:
       steps:
         - name: Checkout
           uses: actions/checkout@v2
-
+        - uses: actions/setup-java@v4
+          with:
+            distribution: 'temurin' # See 'Supported distributions' for available options
+            java-version: '17'
         - uses: actions/cache@v2
           with:
             path: |
@@ -84,7 +87,10 @@ jobs:
       runs-on: ubuntu-latest
       continue-on-error: true
       steps:
-
+        - uses: actions/setup-java@v4
+          with:
+            distribution: 'temurin' # See 'Supported distributions' for available options
+            java-version: '17'
         - name: Checkout
           uses: actions/checkout@v2
 
@@ -113,7 +119,10 @@ jobs:
       runs-on: ubuntu-latest
       continue-on-error: true
       steps:
-
+        - uses: actions/setup-java@v4
+          with:
+            distribution: 'temurin' # See 'Supported distributions' for available options
+            java-version: '17'
         - name: Checkout
           uses: actions/checkout@v2
 
