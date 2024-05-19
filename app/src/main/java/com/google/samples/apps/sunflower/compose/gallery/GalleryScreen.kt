@@ -58,7 +58,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
-fun GalleryScreen(
+fun GalleryScreen( //asaddwq
     viewModel: GalleryViewModel = hiltViewModel(),
     onPhotoClick: (UnsplashPhoto) -> Unit,
     onUpClick: () -> Unit,

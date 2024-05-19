@@ -30,12 +30,10 @@ import org.junit.runner.RunWith
 class PlantListTest {
     @get:Rule
     val composeTestRule = createComposeRule()
-    
     @Test
     fun plantList_itemShown() {
         startPlantList()
         composeTestRule.onNodeWithText("Apple").assertIsDisplayed()
-
     }
 
     private fun startPlantList(onPlantClick: (Plant) -> Unit = {}) {

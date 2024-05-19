@@ -1,3 +1,5 @@
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+
 /*
  * Copyright 2018 Google LLC
  *
@@ -19,6 +21,7 @@ plugins {
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.ksp)
   alias(libs.plugins.hilt)
+  id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
 }
 
 android {
@@ -105,6 +108,15 @@ androidComponents {
     // Only exclude *.version files in release mode as debug mode requires
     // these files for layout inspector to work.
     it.packaging.resources.excludes.add("META-INF/*.version")
+  }
+}
+ktlint{
+  android = true
+  ignoreFailures = false
+  reporters {
+    reporter(ReporterType.PLAIN)
+    reporter(ReporterType.CHECKSTYLE)
+    reporter(ReporterType.SARIF)
   }
 }
 

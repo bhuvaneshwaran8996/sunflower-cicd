@@ -68,6 +68,7 @@ enum class SunflowerPage(
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
+
     modifier: Modifier = Modifier,
     onPlantClick: (Plant) -> Unit = {},
     viewModel: PlantListViewModel = hiltViewModel(),
