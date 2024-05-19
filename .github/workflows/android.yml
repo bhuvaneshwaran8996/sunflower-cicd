@@ -73,7 +73,7 @@ jobs:
               ${{ runner.os }}-gradle-
 
         - name: Run Debug ktlint
-          run: ./gradlew ktlintDebugCheck --continue
+          run: ./gradlew ktlintcheck --continue
 
         - name: Upload ktlint Reports
           if: ${{ always() }}
