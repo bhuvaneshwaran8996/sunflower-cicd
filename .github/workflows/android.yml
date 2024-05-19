@@ -21,35 +21,115 @@ on:
     branches: [ gha ]
 
 jobs:
+    test_job:
+      name: Test
+      runs-on: ubuntu-latest
+      continue-on-error: true
+      steps:
 
-  build:
-    name: Build
-    runs-on: ubuntu-20.04
+        - name: Checkout
+          uses: actions/checkout@v2
 
-    steps:
-      - uses: actions/checkout@v3
-      - name: set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+        - name: Restore Cache
+          uses: actions/cache@v2
+          with:
+            path: |
+              ~/.gradle/caches
+              ~/.gradle/wrapper
+            key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+            restore-keys: |
+              ${{ runner.os }}-gradle-
 
-# # Disabling androidTest temporarily due to the stability issue b/251319989
-#  androidTest:
-#    needs: build
-#    runs-on: macOS-latest
-#    timeout-minutes: 45
-#
-#    steps:
-#      - uses: actions/setup-java@v3
-#        with:
-#          distribution: 'temurin'
-#          java-version: '17'
-#      - uses: actions/checkout@v3
-#
-#      - name: Setup Android SDK
-#        uses: android-actions/setup-android@v2
-#
-#      - name: Checkout
-#        uses: actions/checkout@v3
+        - name: Run Debug Tests
+          run: ./gradlew testDebugUnitTest --continue
 
+        - name: Upload Test Reports
+          if: ${{ always() }}
+          uses: actions/upload-artifact@v2
+          with:
+            name: test-reports
+            path: '**/build/reports/tests/'
+
+    code_formatting_job:
+      name: Code Formatting
+      runs-on: ubuntu-latest
+      continue-on-error: true
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+
+        - uses: actions/cache@v2
+          with:
+            path: |
+              ~/.gradle/caches
+              ~/.gradle/wrapper
+            key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+            restore-keys: |
+              ${{ runner.os }}-gradle-
+
+        - name: Run Debug ktlint
+          run: ./gradlew ktlintDebugCheck --continue
+
+        - name: Upload ktlint Reports
+          if: ${{ always() }}
+          uses: actions/upload-artifact@v2
+          with:
+            name: ktlint-report
+            path: '**/build/reports/ktlint'
+
+    lint_job:
+      name: Lint
+      runs-on: ubuntu-latest
+      continue-on-error: true
+      steps:
+
+        - name: Checkout
+          uses: actions/checkout@v2
+
+        - name: Restore Cache
+          uses: actions/cache@v2
+          with:
+            path: |
+              ~/.gradle/caches
+              ~/.gradle/wrapper
+            key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+            restore-keys: |
+              ${{ runner.os }}-gradle-
+
+        - name: Run Debug Lint
+          run: ./gradlew lintDebug
+
+        - name: Upload Lint Reports
+          if: ${{ always() }}
+          uses: actions/upload-artifact@v2
+          with:
+            name: lint-report
+            path: '**/build/reports/lint-results-*'
+
+    assemble_job:
+      name: Assemble
+      runs-on: ubuntu-latest
+      continue-on-error: true
+      steps:
+
+        - name: Checkout
+          uses: actions/checkout@v2
+
+        - name: Restore Cache
+          uses: actions/cache@v2
+          with:
+            path: |
+              ~/.gradle/caches
+              ~/.gradle/wrapper
+            key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+            restore-keys: |
+              ${{ runner.os }}-gradle-
+
+        - name: Assemble Debug
+          run: ./gradlew assembleDebug
+
+        - name: Upload APK
+          uses: actions/upload-artifact@v2
+          with:
+            name: apk
+            path: app/build/outputs/apk/debug/**.apk
