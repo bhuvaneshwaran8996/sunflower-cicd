@@ -16,9 +16,9 @@ name: Android CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ gha ]
   pull_request:
-    branches: [ main ]
+    branches: [ gha ]
 
 jobs:
 
@@ -44,7 +44,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '11'
+          java-version: '17'
       - uses: actions/checkout@v3
 
       - name: Setup Android SDK

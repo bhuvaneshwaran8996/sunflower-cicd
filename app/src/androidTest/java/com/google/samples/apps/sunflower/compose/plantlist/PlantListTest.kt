@@ -35,6 +35,7 @@ class PlantListTest {
     fun plantList_itemShown() {
         startPlantList()
         composeTestRule.onNodeWithText("Apple").assertIsDisplayed()
+
     }
 
     private fun startPlantList(onPlantClick: (Plant) -> Unit = {}) {
